@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trabalho 01</title>
+</head>
+
+<body>
+  <div>
+    <label id="label_red" for="red"> R Vermelho </label>
+    <input onchange="alter_color()" id="red" type="range" min="0" max="255" step="1">
+  </div>
+  <div>
+    <label id="label_green" for="green"> G Verde </label>
+    <input onchange="alter_color()" id="green" type="range" min="0" max="255" step="1">
+  </div>
+  <div>
+    <label id="label_blue" for="blue"> B Azul </label>
+    <input onchange="alter_color()" id="blue" type="range" min="0" max="255" step="1">
+  </div>
+  <div id="box">
+
+  </div>
+</body>
+
+<script>alter_color();</script>
+
+</html>

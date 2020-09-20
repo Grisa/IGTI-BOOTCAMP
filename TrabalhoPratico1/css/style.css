@@ -1,0 +1,13 @@
+#label_azul {
+    padding-right: 30px;
+}
+#label_verde {
+    padding-right: 22px;
+}
+
+#box {
+    padding-top: 30px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ccc!important
+}
