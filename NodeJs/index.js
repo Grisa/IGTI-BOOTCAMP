@@ -51,9 +51,7 @@ async function getStateOrderCounterDesc() {
         })
     }));
 
-    console.log(response.sort((a, b) => {
-        return b.ct - a.ct;
-    }).slice(0, 5))
+    console.log(response.sort((a, b) => b.ct - a.ct).slice(0, 5))
 }
 
 async function getStateOrderCounterAsc() {
@@ -67,9 +65,7 @@ async function getStateOrderCounterAsc() {
         })
     }));
 
-    console.log(response.sort((a, b) => {
-        return a.ct - b.ct;
-    }).slice(0, 5))
+    console.log(response.sort((a, b) => a.ct - b.ct).slice(0, 5))
 }
 
 async function returnUFCityNameDesc(UFName) {
@@ -77,9 +73,7 @@ async function returnUFCityNameDesc(UFName) {
     const stateString = await fs.readFile("./jsonTrabalho/" + UFName + ".json", "utf-8");
     let state = JSON.parse(stateString);
 
-    return state.sort((a, b) => {
-        return b.Nome.length - a.Nome.length;
-    })[0].Nome
+    return state.sort((a, b) => b.Nome.length - a.Nome.length)[0].Nome
 }
 
 async function returnUFCityNameAsc(UFName) {
@@ -87,9 +81,7 @@ async function returnUFCityNameAsc(UFName) {
     const stateString = await fs.readFile("./jsonTrabalho/" + UFName + ".json", "utf-8");
     let state = JSON.parse(stateString);
 
-    return state.sort((a, b) => {
-        return a.Nome.length - b.Nome.length;
-    })[0].Nome
+    return state.sort((a, b) => a.Nome.length - b.Nome.length)[0].Nome
 }
 
 async function getStateOrderNameDesc() {
@@ -103,9 +95,7 @@ async function getStateOrderNameDesc() {
         })
     }));
 
-    console.log(response.sort((a, b) => {
-        return a.name.length - b.name.length;
-    }).slice(0, 5))
+    console.log(response.sort((a, b) => a.name.length - b.name.length).slice(0, 5))
 }
 
 async function getStateOrderNameAsc() {
@@ -119,9 +109,7 @@ async function getStateOrderNameAsc() {
         })
     }));
 
-    console.log(response.sort((a, b) => {
-        return b.name.length - a.name.length;
-    }).slice(0, 5))
+    console.log(response.sort((a, b) => b.name.length - a.name.length).slice(0, 5))
 }
 
 async function getLongestCityName() {
@@ -135,9 +123,7 @@ async function getLongestCityName() {
         })
     }));
 
-    console.log(response.sort((a, b) => {
-        return b.name.length - a.name.length;
-    })[0])
+    console.log(response.sort((a, b) => b.name.length - a.name.length)[0])
 }
 
 async function getSmallestCityName() {
@@ -151,9 +137,7 @@ async function getSmallestCityName() {
         })
     }));
 
-    console.log(response.sort((a, b) => {
-        return b.name.length - a.name.length;
-    }))
+    console.log(response.sort((a, b) => b.name.length - a.name.length))
 }
 
 /*
