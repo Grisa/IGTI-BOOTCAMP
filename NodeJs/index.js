@@ -6,6 +6,8 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
+const defaultEncode = "utf-8";
+
 readAndWriteFiles()
 //rl.question("Digite uma sigla: ", sigla => { returnUFCityCount(sigla); rl.close(); })
 //getStateOrderCounterDesc();
@@ -16,10 +18,10 @@ getStateOrderCounterAsc();
 //getSmallestCityName()
 
 async function readAndWriteFiles() {
-    const cityString = await fs.readFile("jsonTrabalho/Cidades.json", "utf-8");
+    const cityString = await fs.readFile("jsonTrabalho/Cidades.json", defaultEncode);
     var cityJson = JSON.parse(cityString);
 
-    const statesString = await fs.readFile("jsonTrabalho/Estados.json", "utf-8");
+    const statesString = await fs.readFile("jsonTrabalho/Estados.json", defaultEncode);
     var statesJson = JSON.parse(statesString);
     statesJson.forEach(element => {
         let obj = cityJson.filter(value => {
@@ -28,20 +30,20 @@ async function readAndWriteFiles() {
             }
         });
 
-        fs.writeFile("./jsonTrabalho/" + element.Sigla + ".json", JSON.stringify(obj));
+        fs.writeFile(`./jsonTrabalho/${element.Sigla}.json`, JSON.stringify(obj));
     });
 }
 
 async function returnUFCityCount(UFName) {
 
-    const stateString = await fs.readFile("./jsonTrabalho/" + UFName + ".json", "utf-8");
+    const stateString = await fs.readFile(`./jsonTrabalho/${UFName}.json`, defaultEncode);
     var state = JSON.parse(stateString);
 
     return state.length;
 }
 
 async function getStateOrderCounterDesc() {
-    const statesString = await fs.readFile("jsonTrabalho/Estados.json", "utf-8");
+    const statesString = await fs.readFile("jsonTrabalho/Estados.json", defaultEncode);
     let statesJson = JSON.parse(statesString);
 
     let response = await Promise.all(statesJson.map(async element => {
@@ -57,7 +59,7 @@ async function getStateOrderCounterDesc() {
 }
 
 async function getStateOrderCounterAsc() {
-    const statesString = await fs.readFile("jsonTrabalho/Estados.json", "utf-8");
+    const statesString = await fs.readFile("jsonTrabalho/Estados.json", defaultEncode);
     let statesJson = JSON.parse(statesString);
 
     let response = await Promise.all(statesJson.map(async element => {
@@ -74,7 +76,7 @@ async function getStateOrderCounterAsc() {
 
 async function returnUFCityNameDesc(UFName) {
 
-    const stateString = await fs.readFile("./jsonTrabalho/" + UFName + ".json", "utf-8");
+    const stateString = await fs.readFile(`./jsonTrabalho/${UFName}.json`, defaultEncode);
     let state = JSON.parse(stateString);
 
     return state.sort((a, b) => {
@@ -84,7 +86,7 @@ async function returnUFCityNameDesc(UFName) {
 
 async function returnUFCityNameAsc(UFName) {
 
-    const stateString = await fs.readFile("./jsonTrabalho/" + UFName + ".json", "utf-8");
+    const stateString = await fs.readFile(`./jsonTrabalho/${UFName}.json`, defaultEncode);
     let state = JSON.parse(stateString);
 
     return state.sort((a, b) => {
@@ -93,7 +95,7 @@ async function returnUFCityNameAsc(UFName) {
 }
 
 async function getStateOrderNameDesc() {
-    const statesString = await fs.readFile("jsonTrabalho/Estados.json", "utf-8");
+    const statesString = await fs.readFile("jsonTrabalho/Estados.json", defaultEncode);
     let statesJson = JSON.parse(statesString);
 
     let response = await Promise.all(statesJson.map(async element => {
@@ -109,7 +111,7 @@ async function getStateOrderNameDesc() {
 }
 
 async function getStateOrderNameAsc() {
-    const statesString = await fs.readFile("jsonTrabalho/Estados.json", "utf-8");
+    const statesString = await fs.readFile("jsonTrabalho/Estados.json", defaultEncode);
     let statesJson = JSON.parse(statesString);
 
     let response = await Promise.all(statesJson.map(async element => {
@@ -125,7 +127,7 @@ async function getStateOrderNameAsc() {
 }
 
 async function getLongestCityName() {
-    const statesString = await fs.readFile("jsonTrabalho/Estados.json", "utf-8");
+    const statesString = await fs.readFile("jsonTrabalho/Estados.json", defaultEncode);
     let statesJson = JSON.parse(statesString);
 
     let response = await Promise.all(statesJson.map(async element => {
@@ -141,7 +143,7 @@ async function getLongestCityName() {
 }
 
 async function getSmallestCityName() {
-    const statesString = await fs.readFile("jsonTrabalho/Estados.json", "utf-8");
+    const statesString = await fs.readFile("jsonTrabalho/Estados.json", defaultEncode);
     let statesJson = JSON.parse(statesString);
 
     let response = await Promise.all(statesJson.map(async element => {
@@ -169,7 +171,7 @@ async function writeJsonFiles() {
         }
 
         await fs.writeFile("teste.json", JSON.stringify(obj));
-        const data = await fs.readFile("teste.json", "utf-8");
+        const data = await fs.readFile("teste.json", encode);
         console.log(JSON.parse(data));
     } catch (err) {
         console.log(err);
@@ -187,7 +189,7 @@ fs.writeFile("teste.txt", "xxxxx", function (err) {
     if (err) {
         console.log(err)
     } else {
-        fs.readFile("teste.txt", "utf-8", function (err, data) {
+        fs.readFile("teste.txt", encode, function (err, data) {
             if (err) {
                 console.log(err);
             } else {
