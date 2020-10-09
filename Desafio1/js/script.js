@@ -1,4 +1,4 @@
-var response;
+let response;
 
 function data_return() {
     fetch("https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo").then(res => {
@@ -22,11 +22,11 @@ function runFilter(elValue) {
 }
 
 function buildResultDiv(data) {
-    var avgAge = 0;
-    var count = 0;
-    var maleCount = 0;
-    var femaleCount = 0;
-    var sumAge = 0;
+    let avgAge = 0;
+    let count = 0;
+    let maleCount = 0;
+    let femaleCount = 0;
+    let sumAge = 0;
 
     count = data.length;
     data.forEach(values => {
