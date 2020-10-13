@@ -108,4 +108,28 @@ app.post("/search", async (req, res) => {
     res.end()
 })
 
+app.post("/sumGrades", async (req, res) => {
+
+    let gradeString = await fs.readFile("json/grades.json", defaultEncode);
+    let gradeJson = JSON.parse(gradeString);
+    let data = req.body;
+
+    let obj = gradeJson.grades.map(el => { if (el.student == data.student) return el })
+
+    if (obj) {
+        let gradeSum = 0;
+        var x = await obj.forEach(async element => {
+            if (!!element) {
+                if (data.subject.toLowerCase() == element.subject.toLowerCase()) {
+                    gradeSum = gradeSum + element.value;
+                }
+            }
+        });
+        res.send(`Soma da nota do aluno ${data.student}: ${gradeSum}`);
+    } else {
+        res.send("Nao existe o ID");
+    }
+    res.end()
+})
+
 app.listen(3000, () => { console.log("Sucesso") });
