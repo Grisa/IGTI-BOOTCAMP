@@ -4,18 +4,8 @@ import { futimesSync, promises as fs, writeFile } from "fs";
 const defaultEncode = "utf-8";
 
 const app = express();
-app.use(express.json())
 
-/*
-{
-    "id": 2,
-    "student": "Loiane Groner",
-    "subject": "02 - Node",
-    "type": "Fórum",
-    "value": 5,
-    "timestamp": "2020-05-19T18:21:24.964Z"
-}
-*/
+app.use(express.json())
 
 app.get("/readJson", async (req, res) => {
     const gradeString = await fs.readFile("json/grades.json", defaultEncode);
@@ -129,6 +119,46 @@ app.post("/sumGrades", async (req, res) => {
     } else {
         res.send("Nao existe o ID");
     }
+    res.end()
+})
+
+app.post("/avgGrades", async (req, res) => {
+
+    let gradeString = await fs.readFile("json/grades.json", defaultEncode);
+    let gradeJson = JSON.parse(gradeString);
+    let data = req.body;
+
+    let obj = gradeJson.grades.map(el => { if (el.subject.toLowerCase() == data.subject.toLowerCase()) return el })
+
+    if (obj) {
+        let gradeSum = 0;
+        let count = 0;
+        var x = await obj.forEach(async element => {
+            if (!!element) {
+                if (data.type.toLowerCase() == element.type.toLowerCase()) {
+                    gradeSum = gradeSum + element.value;
+                    count++;
+                }
+            }
+        });
+        res.send(`Média de notas da matéria ${data.subject} e do tipo ${data.type}: ${gradeSum/count}`);
+    } else {
+        res.send("Nao existe o ID");
+    }
+    res.end()
+})
+
+app.post("/topGrades", async (req, res) => {
+    let gradeString = await fs.readFile("json/grades.json", defaultEncode);
+    let gradeJson = JSON.parse(gradeString);
+    let data = req.body;
+
+    let obj = gradeJson.grades.map(el => { 
+        if (el.subject.toLowerCase() == data.subject.toLowerCase() && el.type.toLowerCase() == data.type.toLowerCase())
+            return el
+    });
+
+    res.send(obj.sort((a, b) => b.value - a.value).slice(0, 3))
     res.end()
 })
 
