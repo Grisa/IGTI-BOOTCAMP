@@ -1,0 +1,13 @@
+.boxDivCounter {
+    float: left;
+    padding-right: 5px;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bolder;
+}
+
+.boxDivValues {
+    float: right;
+    text-align: right;
+    font-weight: bolder;
+}

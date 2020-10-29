@@ -59,6 +59,7 @@ export default class App extends React.Component {
             onBlur={this.handleSalaryChange}
             type="money"
             value={salbruto}
+            onChange={e => this.setState({salbruto:e.target.value})}
             label="Salario bruto"
             InputProps={{
               startAdornment: <InputAdornment position="start">$</InputAdornment>,
